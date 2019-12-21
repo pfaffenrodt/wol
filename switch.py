@@ -5,8 +5,8 @@ import voluptuous as vol
 import homeassistant.helpers.config_validation as cv
 from homeassistant.components.switch import (PLATFORM_SCHEMA)
 from wakeonlan import send_magic_packet, BROADCAST_IP, DEFAULT_PORT
-from homeassistant.helpers.entity import Entity, ToggleEntity
-from typing import Any, Dict, Iterable, List, Optional, Union
+from homeassistant.helpers.entity import ToggleEntity
+from typing import Any
 
 DOMAIN = 'wol'
 
