@@ -1,6 +1,4 @@
-"""
-Wake on lan component.
-"""
+"""Wake on lan component"""
 import logging
 import voluptuous as vol
 
@@ -34,10 +32,10 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     mac = config.get(CONF_HOST_MAC_ADDRESS)
     ip = config.get(CONF_HOST_IP)
     port = config.get(CONF_HOST_PORT)
-    async_add_entities([Wol(device_name, mac, ip, port)], True)
+    async_add_entities([WakeOnLanDevice(device_name, mac, ip, port)], True)
 
 
-class Wol(ToggleEntity):
+class WakeOnLanDevice(ToggleEntity):
 
     def __init__(self, name, mac_address, ip_address=BROADCAST_IP, port=DEFAULT_PORT):
         self.device_name = name
@@ -46,6 +44,7 @@ class Wol(ToggleEntity):
         self.port = port
 
     def send(self):
+        """send and perform the wol"""
         send_magic_packet(self.mac_address, ip_address=self.ip_address, port=self.port)
         _LOGGER.info("perform wake on lan to" + self.name)
 
@@ -56,7 +55,7 @@ class Wol(ToggleEntity):
 
     @property
     def is_on(self) -> bool:
-        """Return True if entity is on."""
+        """Return Always False. Cannot determine if device is on."""
         return False
 
     def turn_on(self, **kwargs: Any) -> None:
@@ -64,4 +63,4 @@ class Wol(ToggleEntity):
         self.send()
 
     def turn_off(self, **kwargs: Any) -> None:
-        """ do nothing """
+        """ wol can not turn off the device """

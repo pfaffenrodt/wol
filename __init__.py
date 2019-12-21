@@ -1,3 +1,1 @@
-"""
-Wake on lan component.
-"""
+"""Wake on lan component"""
