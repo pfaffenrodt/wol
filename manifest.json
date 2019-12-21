@@ -1,0 +1,9 @@
+{
+  "domain": "wol",
+  "name": "Wake On Lan",
+  "documentation": "https://github.com/pfaffenrodt/wol",
+  "dependencies": [],
+  "codeowners": [],
+  "requirements": ["wakeonlan==1.1.6"],
+  "config_flow": false
+}

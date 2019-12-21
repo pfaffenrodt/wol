@@ -1,0 +1,3 @@
+"""
+Wake on lan component.
+"""
