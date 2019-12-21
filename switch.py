@@ -12,6 +12,7 @@ from typing import Any, Dict, Iterable, List, Optional, Union
 
 DOMAIN = 'wol'
 
+CONF_HOST_NAME = 'name'
 CONF_HOST_MAC_ADDRESS = 'mac'
 CONF_HOST_IP = 'ip'
 CONF_HOST_PORT = 'port'
@@ -28,10 +29,11 @@ _LOGGER = logging.getLogger(__name__)
 async def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
     """Set up the device."""
 
-    MAC = config.get(CONF_HOST_MAC_ADDRESS)
-    IP = config.get(CONF_HOST_IP)
-    PORT = config.get(CONF_HOST_PORT)
-    async_add_entities([Wol(MAC, IP, PORT)], True)
+    name = config.get(CONF_HOST_NAME)
+    mac = config.get(CONF_HOST_MAC_ADDRESS)
+    ip = config.get(CONF_HOST_IP)
+    port = config.get(CONF_HOST_PORT)
+    async_add_entities([Wol(name, mac, ip, port)], True)
 
 
 class Wol(ToggleEntity):
