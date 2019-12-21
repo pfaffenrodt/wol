@@ -47,6 +47,7 @@ class Wol(ToggleEntity):
 
     def send(self):
         send_magic_packet(self.mac_address, ip_address=self.ip_address, port=self.port)
+        _LOGGER.info("perform wake on lan to" + self.name)
 
     @property
     def name(self):
