@@ -12,12 +12,13 @@ from typing import Any, Dict, Iterable, List, Optional, Union
 
 DOMAIN = 'wol'
 
-CONF_HOST_NAME = 'name'
+CONF_HOST_NAME = 'device_name'
 CONF_HOST_MAC_ADDRESS = 'mac'
 CONF_HOST_IP = 'ip'
 CONF_HOST_PORT = 'port'
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
+    vol.Required(CONF_HOST_NAME, 'PC'): cv.string,
     vol.Required(CONF_HOST_MAC_ADDRESS): cv.string,
     vol.Required(CONF_HOST_PORT, default=DEFAULT_PORT): cv.port,
     vol.Optional(CONF_HOST_IP, default=BROADCAST_IP): cv.string,
@@ -29,11 +30,11 @@ _LOGGER = logging.getLogger(__name__)
 async def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
     """Set up the device."""
 
-    name = config.get(CONF_HOST_NAME)
+    device_name = config.get(CONF_HOST_NAME)
     mac = config.get(CONF_HOST_MAC_ADDRESS)
     ip = config.get(CONF_HOST_IP)
     port = config.get(CONF_HOST_PORT)
-    async_add_entities([Wol(name, mac, ip, port)], True)
+    async_add_entities([Wol(device_name, mac, ip, port)], True)
 
 
 class Wol(ToggleEntity):
