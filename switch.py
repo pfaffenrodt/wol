@@ -1,12 +1,12 @@
 """Wake on lan component"""
 import logging
-import voluptuous as vol
+from typing import Any
 
 import homeassistant.helpers.config_validation as cv
-from homeassistant.components.switch import (PLATFORM_SCHEMA)
-from wakeonlan import send_magic_packet, BROADCAST_IP, DEFAULT_PORT
+import voluptuous as vol
+from homeassistant.components.switch import PLATFORM_SCHEMA
 from homeassistant.helpers.entity import ToggleEntity
-from typing import Any
+from wakeonlan import BROADCAST_IP, DEFAULT_PORT, send_magic_packet
 
 DOMAIN = 'wol'
 
@@ -46,7 +46,7 @@ class WakeOnLanDevice(ToggleEntity):
     def send(self):
         """send and perform the wol"""
         send_magic_packet(self.mac_address, ip_address=self.ip_address, port=self.port)
-        _LOGGER.info("perform wake on lan to" + self.name)
+        _LOGGER.info("Perform wake on lan to %s", self.name)
 
     @property
     def name(self):
