@@ -1,6 +1,9 @@
 # Wake on lan for home assistant
 
-this is a component for home assistant to perform a wake on lan action.
+This is a component for home assistant to perform a wake on lan action.
+
+There is already an component, that I found after I wrote this component.
+see https://www.home-assistant.io/integrations/wake_on_lan
 
 
 # Device config
